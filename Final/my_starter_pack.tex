@@ -1,0 +1,349 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{a4paper, bottom=1.5in, left=1.2in, right=1.2in}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{graphicx}
+% \usepackage{float}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{esint}
+\usepackage{setspace}
+% \usepackage{caption}
+% \usepackage{subcaption}
+\usepackage{floatrow}
+\usepackage{multirow}
+\usepackage[ruled,linesnumbered,vlined]{algorithm2e}
+\usepackage{listings}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{190100044-190100055}
+\rhead{Software Systems Laboratory}
+\renewcommand{\footrulewidth}{1.0pt}
+\cfoot{Page \thepage}
+
+% \lstset{
+%   frameround=fttt,
+%   numbers=left,
+%   breaklines=true,
+%   keywordstyle=\color{blue}\bfseries,
+%   numberstyle=\tiny\color{gray},
+%   commentstyle=\color{green!30!black},
+%   stringstyle = \color{violet}
+% }
+\newcounter{listingcount}
+\lstnewenvironment{customlstlisting}[2]
+{
+  \refstepcounter{listingcount}
+  \begin{center}
+    \textbf{\large{Listing \thelistingcount : #1}} \\
+    \textbf{#2}
+  \end{center}
+  \vspace{-1em}
+  \lstset{
+    frameround=fttt,
+    language=#1,
+    numbers=left,
+    breaklines=true,
+    keywordstyle=\color{blue}\bfseries,
+    numberstyle=\tiny\color{gray},
+    commentstyle=\color{green!30!black},
+    stringstyle = \color{violet},
+  }
+}
+{
+    \vspace{1.5em}
+}
+
+\title{\LaTeX{} Starter Pack}
+\author{190100044-190100055}
+\date{August 30, 2020}
+
+\setlength{\parindent}{0em}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\thispagestyle{empty}
+
+\newpage \setcounter{page}{1}
+\section{Introduction}
+\LaTeX{} (most popularly pronounced lay-tech; sometimes laa-tech) is an incredibly efficient office tool to typeset professional looking technical documents and reports. You will certainly find it useful to write assignments, format your resume, and more generally, to make everything you do look cooler. \par\medskip
+\LaTeX{}, like HTML, is a \textbf{markup language}. It's part of the \TeX{} typesetting system created by the immortal Donald Knuth. The presentation of the content depends on the properties of the tags it is wrapped in. For more involved typesetting purposes, this gives it a clear edge over mainstream word processors like \textcolor[HTML]{001a33}{MS-Word}: in Word, \textit{what you see is what you get}, and getting what you want can be insanely tough. \par\medskip
+Here's how it works: you write your markup commands in the source file, which has a \verb!.tex! extension. You need ``software", or formally, a \TeX{} distribution, to actually typeset them into a format suitable for distribution, which is generally a pdf. The most popular distribution to install on your machine is TeX Live; MikTeX is an alternative. You could also work online with Overleaf - no installations, and a ridiculously straightforward workflow. This is ideal for smaller projects. Weigh your options \href{https://www.latex-project.org/get/}{here}. Yes, a hyperlink! \par\medskip
+\LaTeX{} allows us to write complex mathematical equations without much fuss; its environments save us the hassle of organising large documents manually; with \LaTeX{} we can showcase code and render almost any scientific illustration. \LaTeX{} is paradise for anyone who works in STEM. Once you have experience, you can typeset assignments, papers, articles and theses with unprecedented ease. \par\medskip
+In this assignment, we will explore and demonstrate some features that often prove themselves useful for several purposes. \par\medskip
+\onehalfspacing
+{\large
+    In this introductory section, we have also seen how we can format text. For instance, we can make text bold, italicized, colour it, or manipulate its size, and even toggle between alignments!} \par\medskip
+\singlespacing
+\begin{flushright}
+    \LARGE\textsc{\textcolor[HTML]{99000C}{Carpe Diem!}} % Identify this font and color properly
+\end{flushright}
+\begin{figure}[H]
+    \includegraphics[width=0.6\textwidth]{ease-graph.png}
+    \centering
+    \caption{This graph by Marko Pinteric is spot on.}
+\end{figure}
+
+\newpage
+\section{Basic Document Formatting}
+In STEM, brevity is highly valued. You want to put forth your arguments as crisply as possible. Of course, sometimes a rather long clarification may be in order\footnote{Footnotes are a classy way to do that. Making footnotes is fairly simple in \LaTeX{}}, however, it is better to stick to the central theme and not disrupt the flow. In order to make your point, lists are often the cleanest option.
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+\subsection*{Features we demonstrate}
+\begin{itemize}
+    \setlength\itemsep{0em}
+    \item Making a title and table of contents
+    \item Organising the document into sections
+    \item Setting up the page layout
+    \item Designing our custom header and footer
+    \item Formatting text
+    \item Making (nested) lists
+          \begin{enumerate}
+              \setlength\itemsep{0em}
+              \item itemize
+              \item enumerate
+              \item description
+          \end{enumerate}
+    \item Footnotes
+    \item Typesetting mathematics
+    \item Theorem and Proof environments
+    \item Hyperlinks and cross references within the document
+    \item Custom environments
+    \item Algorithms and code
+    \item Inserting images
+    \item Drawing tables
+    \item Citations\footnote{using BibTeX, which automatically takes care of the bibliography formatting}
+\end{itemize}
+\noindent
+In order to make your lists appear more concise, you can specify the \verb!itemsep! parameter as an optional argument to the environment. You will need the \verb!enumitem! package for that.\par\medskip
+Descriptive lists are sometimes handy:
+\begin{description}
+    \setlength\itemsep{0em}
+    \item[CS 207] Discrete Structures
+    \item[CS 213] Data Structures and Algorithms
+    \item[CS 215] Data Analysis and Interpretation
+    \item[CS 251] Software Systems Lab
+    \item[CS 293] Data Structures and Algorithms Lab
+\end{description}
+\subsection*{The Page Layout}
+The paper size for this document is A4. The left and right margins are 1.2 inches each; the lower margin is 1.5 inches. The \verb!geometry! package is very convenient to set up and manipulate these dimensions.
+
+\newpage
+\section{Mathematics}
+Make sure you have imported the \verb!amsmath!, \verb!amsthm!, \verb!amssymb! and \verb!esint! packages, in that order.
+Have a look at the tutorial to understand how they work, and what they do. In particular, the \verb!amsthm! package makes defining ordered theorem-like environments very convenient.
+
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\theoremstyle{remark} \newtheorem*{remark}{Remark}
+
+\begin{thm}[Markov's Inequality]
+    \label{thm:markov}
+    If X is a non-negative random variable and $a > 0$ then
+    $$ P(X \geq a) \leq \frac{E(X)}{a} $$
+\end{thm}
+
+\setcounter{cor}{1}
+\begin{cor}[Chebyshev's Inequality]
+    \label{cor:2}
+    Let X be an integrable random variable with finite expected
+    value $\mu$ and finite variance $\sigma^2 \neq 0$. Then for any $k  \in \mathbb{R}$, $k > 0$,
+    $$ P(|X-\mu| \geq k\sigma) \leq \frac{1}{k^2} $$
+\end{cor}
+
+\begin{proof}
+    Let the random variable $ Y \coloneqq (X -\mu)^2 $. Observe that $Y$ is a non-negative random variable;
+    and from the definition of variance, $E(Y) = \sigma^2$, which is positive from the premise. Hence, we can appeal to Theorem \ref{thm:markov}.
+    $$ P(Y \geq k^2\sigma^2) \leq \frac{\sigma^2}{\sigma^2k^2} = \frac{1}{k^2} $$
+    However, $ P(Y \geq k^2\sigma^2) = P(|X-\mu| \geq k\sigma)$ and we are done.
+\end{proof}
+\noindent
+Consider a plane $z = ax + by + c$. Usually, three points on the plane are sufficient to determine the parameters $a, b, c$; however, we're given a data set of several points: $x$ and $y$ coordinates are
+known perfectly, but the $z$ coordinates are corrupted by a Gaussian noise $\mathcal{N}(0, 1)$. Here's how we solve for the maximum likelihood estimates of the parameters:
+\begin{equation}
+    \label{eqn:equation1}
+    \begin{bmatrix}
+        \sum_i x^2_i  & \sum_i x_iy_i & \sum_i x_i \\
+        \sum_i x_iy_i & \sum_i y^2_i  & \sum_i y_i \\
+        \sum_i x_i    & \sum_i y_i    & \sum_i 1
+    \end{bmatrix}
+    \begin{bmatrix}
+        \hat a \\
+        \hat b \\
+        \hat c \\
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \sum_i x_iz_i \\
+        \sum_i y_iz_i \\
+        \sum_i z_i    \\
+    \end{bmatrix}
+\end{equation}
+The above equation (we can also refer to it as equation \ref{eqn:equation1} as we created a label) is obtained by setting the partial derivatives of the log-likelihood to 0, eg. $ \partial \mathcal{L}/ \partial a = 0$ etc.\par\medskip
+Observe that we also cross referenced Theorem \ref{thm:markov} in the proof of Corollary \ref{cor:2}. And here we just
+did it again. This is how we use labels in tandem with the \verb!hyperref! package.
+
+\setcounter{thm}{2}
+\begin{thm}[De Morgan's Law]
+    $ \neg (a \lor b) \iff \neg a \land \neg b$. Alternately, in the context of sets, we
+    have $ \overline{A \cup B} = \overline A \cap \overline B.$
+\end{thm}
+\begin{remark}
+    This is closely related to the following rule in first order propositional logic: $ \neg (\exists x.p(x)) \iff \forall x.\neg p(x) $
+\end{remark}
+
+\noindent
+We almost always want to cite sources for claims we make, because when you publish, it's pointless to keep reinventing the wheel. For instance, the Kronecker's Theorem on simultaneous Diophantine
+approximations is a standard but powerful result, it makes sense to refer the reader to \cite[Chap. 7, Sec. 1.3, Prop. 7]{citation2} for a statement and proof. This source is a book. Make sure you enter the relevant information in the appropriate fields in the BibTeX entry.\par\medskip
+In Computer Science, most citations are journal or conference papers. A discussion on algebraic numbers is incomplete without citing the Mignotte separation bounds, given in a modestly titled conference paper \cite{citation3}. We can even cite multiple sources with a single command \cite{citation1,citation4}. These are
+journal articles. If possible, it's best to also specify the volume and page numbers. Your aim should be to point the reader to what you're quoting as unambiguously as possible.
+
+\newpage
+\section{Computer Science}
+\subsection{Algorithms}
+We have used the \verb!algorithm2e! package.
+
+\DecMargin{1.5em}
+\begin{algorithm}[h]
+    \caption{Dijkstra’s Algorithm}
+    \SetAlgoLined
+    \DontPrintSemicolon
+    \KwData{Graph, source}
+    \KwResult{Distances of each vertex from the source and starting edges of the shortest paths}
+    create priority queue Q of vertices of Graph //min-heap\;
+    \ForEach{vertex $v$ in Graph}{
+        $dist[v] \leftarrow \infty$\;
+        $prev[v] \leftarrow$ UNDEFINED\;
+        add $v$ to $Q$\;
+    }
+    $dist[source] \leftarrow 0$\;
+    \While{$Q$ is not empty}{
+        $u \leftarrow Q.extract()$\;
+        \ForEach{neighbour $v \in Q$ of $u$}{
+            $alt \leftarrow dist[u] + length(u, v)$\;
+            \If{$alt < dist[v]$}{
+                $dist[v] \leftarrow alt$\;
+                $prev[v] \leftarrow u$\;
+            }
+        }
+    }
+    return $dist[]$, $prev[]$\;
+\end{algorithm}
+\IncMargin{1.5em}
+
+\subsection{Environments \& Code}
+\vspace{1em}
+\begin{customlstlisting}{[LaTeX]TeX}{The Listings Package}
+\begin{lstlisting}
+%Your code goes here.
+
+%This is usually how you present code in \LaTeX, without worrying about accidentally invoking a macro. Yes, the text is displayed verbatim.
+\end{lstlisting}
+\label{trickq}
+\end{customlstlisting}
+\vspace{1em}
+For our document, however, we noticed that na\"{i}ve methods don’t work, and defined a custom environment with \verb!\lstnewenvironment!. This takes care of title formatting and vertical spacing too! Our environment has a counter associated with it, and takes the language and title as arguments. Other code formatting options are specified with \verb!\lstset{...}!. You might want to have a look at the tutorial!
+
+\newpage
+\begin{customlstlisting}{[LaTeX]TeX}{Algorithm Boilerplate}
+\documentclass{article}
+%...
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+%...
+\begin{document}
+%...
+\begin{algorithm}[h]
+\caption{...}
+\SetAlgoLined
+\DontPrintSemicolon
+\KwData{...}
+\KwResult{...}
+Statement \;
+%Let magic happen here
+$1+1=2$ \;
+\end{algorithm}
+%...
+\end{document}
+\end{customlstlisting}
+
+\begin{customlstlisting}{Bash}{Another Language}
+#some keywords
+for echo cat case if esac elif fi awk sed pwd while do
+sudo apt-get update sleep
+\end{customlstlisting}
+
+\begin{customlstlisting}{Python}{Keywords, comments, strings}
+from numpy import *
+#insanely powerful library
+print("Hello Everyone!")
+\end{customlstlisting}
+\bigskip
+
+The advantage of defining ordered environments like this is that you can refer to this pretty easily if you’ve left a label properly. If you want to shift them around, the counter and the cross references will do the adjustment automatically. Of the above, Listing 1 is a fiendish trick question, and Listing 2 is rather benevolent.
+
+
+\newpage
+\section{Utilities}
+\subsection{Images}
+You'll sometimes find the need to include images in your report. Ideally, the images should enhance the document. But yeah, you're probably going to use this technique for a rather dirty life hack. If a Prof insists on a \LaTeX{} report, you're just going to dump a photo of your exquisite handwriting to save time, aren't you? \textit{Exploit this loophole at your own risk. The original author of this assignment can neither confirm nor deny his endorsement of the jugaad.}
+\begin{figure}[H]
+    \centering
+    \begin{floatrow}
+        \ffigbox[\FBwidth][0.55\textwidth]{\caption{ Aristotle: The first formal logician}}
+        {\includegraphics[height=0.47\textwidth]{aristotle.png}}
+        \ffigbox[\FBwidth][0.55\textwidth]{\caption{Saul Kripke: we've come a long way since then.}}
+        {\includegraphics[height=0.47\textwidth]{kripke.png}}
+    \end{floatrow}
+\end{figure}
+
+\href{https://cdn.britannica.com/84/87984-050-7C5547FE/Detail-Roman-copy-portrait-bust-Aristotle-Greek.jpg}{Aristotle image source}\\
+\href{https://commons.wikimedia.org/w/index.php?curid=5763037}{Saul Kripke image source}\\
+Make sure you follow these links, so you know where the hyperlinks lead to when you typeset it yourself.
+
+\subsection{Tables}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|l}
+        \hline
+        \textbf{Complexity}         & \textbf{Examples}                                           \\
+        \hline
+        $\mathcal{O}(1)$            & Computing $(-1)^n$                                          \\
+        \hline
+        \multirow{2}{*}{$\mathcal{O}(\log(n))$}
+                                    & Binary Search                                               \\
+                                    & Insertion Removal from a min-heap                           \\
+        \hline
+        \multirow{2}{*}{$\mathcal{O}(n\log(n))$}
+                                    & Merge Sort                                                  \\
+                                    & Fast Fourier Transform                                      \\
+        \hline
+        \multirow{2}{*}{ $\mathcal{O}(n^2)$ }
+                                    & Bubble Sort                                                 \\
+                                    & First attempt at a problem which has a linear time solution \\
+        \hline
+        $2^{\mathcal{O}(\log(n))} $ & AKS Primality Test                                          \\
+        \hline
+        \multicolumn{2}{c}{You might want to define a macro to write this notation conveniently}  \\
+        \hline
+    \end{tabular}
+    \caption{Some common time complexities}
+\end{table}
+
+This table uses \verb!multirow! as well as \verb!multicolumn!. Replicate it as well as you can.
+
+\newpage
+We have used the fairly popular \verb!plainurl! style.
+\bibliographystyle{plainurl}
+\bibliography{my_starter_pack}
+
+\end{document}
